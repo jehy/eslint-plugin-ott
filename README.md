@@ -33,15 +33,8 @@ npm install https://github.com/jehy/eslint-plugin-ott.git --save-dev # install f
 }
 ```
 
-* Add `plugin:ott/recommended` to the `extends` option to enable all recommended rules:
 
-```json
-{
-  "extends": ["plugin:ott/recommended"]
-}
-```
-
-* or enable only some rules manually:
+* Enable some rules:
 
 ```json
 {
