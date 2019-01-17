@@ -2,25 +2,39 @@
 
 const regexp = /^[a-zA-Z0-9-_.]+$/;
 
-module.exports.rules = {
-  'no-log-without-message': context => ({
+function noLogWithoutMessageName(context) {
+  return ({
     MemberExpression(node) {
-      if (node.object.name === 'log' && node.property.name === 'e') {
-        if (!node.parent.arguments || !node.parent.arguments[0])
-        {
-          return;
-        }
-        const {type, value} = node.parent.arguments[0];
-        if (type !== 'Literal')
-        {
-          context.report(node, `First loggger argument should be literal, got ${type}`);
-          return;
-        }
-        if (!regexp.test(value))
-        {
-          context.report(node, `First loggger argument should be english alphanumeric with underscore, got "${value}"`);
-        }
+      if (node.object.name !== 'log' || node.property.name !== 'e') {
+        return;
+      }
+      /* istanbul ignore next */
+      if (!node.parent || !node.parent.arguments || !node.parent.arguments[0])
+      {
+        return;
+      }
+      const {type, value} = node.parent.arguments[0];
+      if (type !== 'Literal')
+      {
+        context.report(node, `First logger argument should be literal, got ${type}`);
+        return;
+      }
+      if (!regexp.test(value))
+      {
+        context.report(node, `First logger argument should be in ${regexp.toString()}, got "${value}"`);
       }
     },
-  }),
+  });
+}
+
+const rules = {
+  'no-log-without-message-name': noLogWithoutMessageName,
 };
+
+const configs = {
+  recommended: {
+    rules,
+  },
+};
+
+module.exports = {rules, configs};
