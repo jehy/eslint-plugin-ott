@@ -7,10 +7,17 @@ const chaiString = require('chai-string');
 chai.use(chaiString);
 const {assert} = chai;
 
-const {rules} = require('../index');
+const {rules, configs} = require('../index');
+
+const ruleName = 'no-log-without-message-name';
+
+describe('config', ()=>{
+  it('should have my recommended rule', ()=>{
+    assert.equal(configs.recommended.rules[ruleName], 2, `Smth wrong with config! Config:\n\n${JSON.stringify(configs)}`);
+  });
+});
 
 describe('Rule for checking message name in log (no-log-without-message-name)', ()=>{
-  const ruleName = 'no-log-without-message-name';
   const linter = new Linter();
   linter.defineRule(ruleName, rules[ruleName]);
 

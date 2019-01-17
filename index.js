@@ -33,7 +33,8 @@ const rules = {
 
 const configs = {
   recommended: {
-    rules,
+    rules: Object.keys(rules)
+      .reduce((res, item) => { res[item] = 2; return res; }, {}),
   },
 };
 
