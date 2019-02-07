@@ -10,7 +10,8 @@ Some OTT ESLint rules
 
 ## Rules
 
-`no-log-without-message-name` - force using `log.e()` calls with nice first arguments.
+* `no-log-without-message-name` - force using `log.e()` calls with nice first arguments.
+* `no-process-std` - restrict using `process.std` funcs.
 
 ## Prerequisites
 
@@ -39,7 +40,8 @@ npm install https://github.com/jehy/eslint-plugin-ott.git --save-dev # install f
 ```json
 {
   "rules": {
-    "ott/no-log-without-message-name": "error"
+    "ott/no-log-without-message-name": "error",
+    "ott/no-process-std": "error"
   }
 }
 ```
